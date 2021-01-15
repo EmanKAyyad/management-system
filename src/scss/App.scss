@@ -1,18 +1,35 @@
+@import "~bootstrap/scss/bootstrap";
 @import "./fonts.scss";
 
 html,
 body {
-    font-family: 'Rubik';
+    font-family: "Rubik";
+    font-weight: normal;
 }
 
-p {
-    font-weight: 400;
+a {
+    &:hover {
+        text-decoration: none;
+    }
 }
 
-span {
-    font-weight: 300;
+ul {
+    padding-left: 0;
+    list-style: none;
 }
 
-div {
-    font-weight: 500;
+.app-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.right-screen {
+    width: 100%;
+}
+
+@include media-breakpoint-up(md) {
+    .right-screen {
+        width: calc(100% - 242px);
+    }
 }

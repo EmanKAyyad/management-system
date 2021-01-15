@@ -1,12 +1,18 @@
 import './scss/App.scss';
+import Sidebar from './components/shared/Sidebar/Sidebar';
+import Header from './components/shared/Header/Header';
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="container">
-      <p>Regular</p>
-      <span>Light</span>
-      <div>Medium</div>
-    </div>
+    <BrowserRouter>
+      <div className="app-container">
+        <Sidebar />
+        <div className="right-screen">
+          <Header />
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
