@@ -44,3 +44,12 @@
         fill: $ms_SecondaryText;
     }
 }
+
+.sub-menu {
+    a {
+        text-transform: capitalize;
+        &.active {
+            font-weight: 500;
+        }
+    }
+}
