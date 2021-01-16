@@ -9,6 +9,15 @@ import {connect} from 'react-redux';
 
 const Sidebar = (props) => {
   const [submenuTwoFlag, setSubMenuTwoFlag] = useState({ flag: false });
+  const openedSideBar = {
+    width: '0',
+    opacity: 0
+  }
+
+  const closedSideBar = {
+    width: '242px',
+    opacity: 1
+  }
 
   const sidebarTwoItems = [
     { name: "operating cost", link: "operating-cost" },
@@ -39,14 +48,14 @@ const Sidebar = (props) => {
   })
 
 
-  return <div className="sidebar d-none d-md-block"  style={props.Flag ? {width: '242px', opacity: 1} : {width: 0, opacity: 0}}>
-    <div className="logo-container">
+  return <div className="sidebar d-none d-md-block"  style={props.Flag ? openedSideBar : closedSideBar}>
+    <div className="logo-container" style={props.Flag ? openedSideBar : closedSideBar}>
       <Link to="/">
         <img className="logo" alt="management system logo" src={logo} />
       </Link>
     </div>
     <nav>
-      <ul className="main-menu">
+      <ul className="main-menu" style={props.Flag ? openedSideBar : closedSideBar}>
         <li><a data-toggle="collapse" href="#sub-menu01" role="button" aria-expanded="false" aria-controls="sub-menu01">
           <span className="list-icon"><svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.53125 0.875H14.4688C14.9271 0.875 15.3281 1.01823 15.6719 1.30469C16.0443 1.5625 16.3021 1.90625 16.4453 2.33594L17.3906 5.51562L18.7227 5.04297L19.1523 6.33203L17.8203 6.80469L18.25 8.26562C18.25 8.29427 18.25 8.33724 18.25 8.39453V8.4375V13.25C18.25 13.2786 18.25 13.3073 18.25 13.3359V13.9375C18.25 14.138 18.1784 14.3099 18.0352 14.4531C17.9206 14.5677 17.763 14.625 17.5625 14.625H15.5L15.2422 13.9375H4.75781L4.5 14.625H2.4375C2.23698 14.625 2.0651 14.5677 1.92188 14.4531C1.80729 14.3099 1.75 14.138 1.75 13.9375V13.3359C1.75 13.3073 1.75 13.293 1.75 13.293C1.75 13.2643 1.75 13.25 1.75 13.25V8.4375V8.39453C1.75 8.33724 1.75 8.29427 1.75 8.26562L2.17969 6.80469L0.847656 6.33203L1.27734 5.04297L2.60938 5.51562L3.55469 2.33594C3.69792 1.90625 3.94141 1.5625 4.28516 1.30469C4.65755 1.01823 5.07292 0.875 5.53125 0.875ZM5.53125 2.25C5.1875 2.25 4.95833 2.42188 4.84375 2.76562L3.98438 5.6875H16.0156L15.1562 2.76562C15.0417 2.42188 14.8125 2.25 14.4688 2.25H5.53125ZM3.55469 7.0625L3.125 8.56641V12.5625H5.1875H16.875V8.56641L16.4453 7.0625H3.55469ZM4.11328 8.05078C4.3138 7.85026 4.55729 7.75 4.84375 7.75C5.13021 7.75 5.3737 7.85026 5.57422 8.05078C5.77474 8.2513 5.875 8.49479 5.875 8.78125C5.875 9.06771 5.77474 9.3112 5.57422 9.51172C5.3737 9.71224 5.13021 9.8125 4.84375 9.8125C4.55729 9.8125 4.3138 9.71224 4.11328 9.51172C3.91276 9.3112 3.8125 9.06771 3.8125 8.78125C3.8125 8.49479 3.91276 8.2513 4.11328 8.05078ZM14.4258 8.05078C14.6263 7.85026 14.8698 7.75 15.1562 7.75C15.4427 7.75 15.6862 7.85026 15.8867 8.05078C16.0872 8.2513 16.1875 8.49479 16.1875 8.78125C16.1875 9.06771 16.0872 9.3112 15.8867 9.51172C15.6862 9.71224 15.4427 9.8125 15.1562 9.8125C14.8698 9.8125 14.6263 9.71224 14.4258 9.51172C14.2253 9.3112 14.125 9.06771 14.125 8.78125C14.125 8.49479 14.2253 8.2513 14.4258 8.05078ZM7.25 9.8125H12.75L13.6094 11.875H12.1484L11.8047 11.1875H8.19531L7.85156 11.875H6.39062L7.25 9.8125Z" />
