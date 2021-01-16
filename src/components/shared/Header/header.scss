@@ -1,4 +1,20 @@
+@import '../../../scss/variables.scss';
+
 header {
     height: 66px;
     border-bottom: 1px solid #E8ECEF;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 25px;
+
+    .left-side {
+        span {
+            color: $ms_PrimaryText;
+            text-transform: capitalize;
+        }
+
+        button {
+            margin-right: 24px;
+        }
+    }
 }

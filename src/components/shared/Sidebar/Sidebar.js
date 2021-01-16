@@ -3,6 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 import './sidebar.scss';
 import logo from '../../../assets/logo.jpg';
 import { withRouter } from "react-router";
+import {connect} from 'react-redux';
+
+
 
 const Sidebar = (props) => {
   const [submenuTwoFlag, setSubMenuTwoFlag] = useState({ flag: false });
@@ -36,7 +39,7 @@ const Sidebar = (props) => {
   })
 
 
-  return <div className="sidebar d-none d-md-block">
+  return <div className="sidebar d-none d-md-block"  style={props.Flag ? {width: '242px', opacity: 1} : {width: 0, opacity: 0}}>
     <div className="logo-container">
       <Link to="/">
         <img className="logo" alt="management system logo" src={logo} />
@@ -72,4 +75,10 @@ const Sidebar = (props) => {
   </div>
 }
 
-export default withRouter(Sidebar);
+const mapStateToProps = state => {
+  return {
+    Flag: state.openSideBarFlag
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Sidebar));

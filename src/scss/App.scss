@@ -13,6 +13,18 @@ a {
     }
 }
 
+button {
+    background-color: transparent;
+    border: none;
+}
+
+a:focus,
+a:active,
+button:focus,
+button:active {
+    outline: none;
+}
+
 ul {
     padding-left: 0;
     list-style: none;
