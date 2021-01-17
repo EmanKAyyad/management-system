@@ -1,0 +1,104 @@
+{
+    "vehicles": [
+        {
+            "id": "001",
+            "name": "Toyota Avanza",
+            "date": "18/1/2021",
+            "status": 1,
+            "time": "10:23 AM",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 625.000
+        },
+        {
+            "id": "002",
+            "name": "Toyota Xenia",
+            "date": "22/1/2021",
+            "status": 2,
+            "time": "9:45 AM",
+            "total_km": 8.845,
+            "volume": 128.55,
+            "cost": 629.000
+        },
+        {
+            "id": "003",
+            "name": "Toyota Avanza",
+            "date": "1/1/2021",
+            "status": 3,
+            "time": "10:23 AM",
+            "total_km": 20.254,
+            "volume": 100.254,
+            "cost": 852.000
+        },
+        {
+            "id": "004",
+            "name": "Toyota Corolla",
+            "date": "18/1/2021",
+            "status": 3,
+            "time": "5:30 pm",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 752.000
+        },
+        {
+            "id": "005",
+            "name": "Toyota Avanza",
+            "date": "18/1/2021",
+            "status": 1,
+            "time": "10:23 AM",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 625
+        },
+        {
+            "id": "006",
+            "name": "Toyota Avanza",
+            "date": "4/1/2021",
+            "status": 1,
+            "time": "10:23 AM",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 625
+        },
+        {
+            "id": "007",
+            "name": "Toyota Xenia",
+            "date": "4/1/2021",
+            "status": 2,
+            "time": "11:15 AM",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 625.000
+        },
+        {
+            "id": "008",
+            "name": "Toyota Corolla",
+            "date": "5/1/2021",
+            "status": 1,
+            "time": "10:23 AM",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 625
+        },
+        {
+            "id": "009",
+            "name": "Toyota Avanza",
+            "date": "18/1/2021",
+            "status": 2,
+            "time": "10:23 AM",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 625
+        },
+        {
+            "id": "010",
+            "name": "Toyota Xenia",
+            "date": "1/1/2021",
+            "status": 1,
+            "time": "10:23 AM",
+            "total_km": 17.845,
+            "volume": 123.55,
+            "cost": 625
+        }
+    ]
+}
