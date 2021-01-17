@@ -1,6 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./fonts.scss";
-@import './variables.scss';
+@import "./variables.scss";
 
 html,
 body {
@@ -56,8 +56,100 @@ ul {
     font-weight: 400;
 }
 
-@include media-breakpoint-up(md) {
-    .right-screen {
-        width: calc(100% - 242px);
+.search-container {
+    display: inline-block;
+    position: relative;
+    margin: 0 10px;
+    vertical-align: bottom;
+
+    svg {
+        position: absolute;
+        left: 14px;
+        top: 18px;
     }
+    .ms-search {
+        height: 46px;
+        border: 1px solid #e8ecef;
+        box-sizing: border-box;
+        border-radius: 4px;
+        width: 258px;
+        padding-left: 36px;
+        font-size: 14px;
+    }
+}
+
+::-webkit-input-placeholder {
+    /* Edge */
+    color: $ms_placeholdertext;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $ms_placeholdertext;
+}
+
+::placeholder {
+    color: $ms_placeholdertext;
+}
+
+.ms-secondary-button {
+    padding: 11.5px 15px;
+    background-color: #fff;
+    border: 1px solid $ms_buttonsBlue;
+    color: $ms_buttonsBlue;
+    font-size: 14px;
+    text-transform: capitalize;
+    border-radius: 4px;
+
+    svg {
+        margin-right: 6px;
+    }
+}
+
+.ms-link-button {
+    color: $ms_buttonsBlue;
+    text-transform: capitalize;
+    font-size: 14px;
+
+    span {
+        color: $ms_SecondaryText;
+    }
+}
+
+.divider {
+    height: 1px;
+    background-color: #e8ecef;
+}
+
+.status {
+    h1 {
+        font-size: 20px;
+        line-height: 23.7px;
+        font-weight: 300;
+        color: $ms_statusBlue;
+    }
+    p{
+        font-size: 12px;
+        color: $ms_SecondaryText;
+        margin-bottom: 0;
+    }
+}
+
+.pagination-status{
+    color: $ms_SecondaryText;
+}
+
+button.pagination-prev,
+button.pagination-next {
+    width: 47px;
+    padding: 10px 14px;
+    border: 1px solid #E8ECEF;
+    background-color: #fff;
+}
+
+button.pagination-prev{
+    border-radius: 4px 0px 0px 4px;
+}
+button.pagination-next{
+    border-radius: 0px 4px 4px 0px;
 }

@@ -4,6 +4,7 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import './fuelHistory.scss';
+import Dropdown from '../../shared/Dropdown/Dropdown';
 
 
 class FuelHistory extends Component {
@@ -14,6 +15,7 @@ class FuelHistory extends Component {
     this.state = {
       from: undefined,
       to: undefined,
+      sortBy: undefined
     };
   }
 
@@ -36,6 +38,10 @@ class FuelHistory extends Component {
     this.setState({ to }, this.showFromMonth);
   }
 
+  onDropdownChangeHandler = (value) => {
+    this.setState({sortBy: value})
+  }
+
   render() {
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
@@ -43,7 +49,7 @@ class FuelHistory extends Component {
     return (
       <div className="fuel-history-container main-panel">
         <h2 className="main-title">Fuel History</h2>
-        <div className="filter-bar">
+        <div className="filter-bar mb-4">
           <div className="InputFromTo">
             <span className="calendar-icon">
               <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +100,60 @@ class FuelHistory extends Component {
 
             <input className="ms-search" type="text" placeholder="search vehicles" />
           </div>
+          <button className="ms-secondary-button">
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.4375 0.5H1.125H14.875H15.5625V1.1875V1.875V2.13281L15.3906 2.30469L10.0625 9.00781V13.5625V13.9062L9.80469 14.1211L7.05469 16.1836L5.9375 17V15.625V9.00781L0.609375 2.30469L0.4375 2.13281V1.875V1.1875V0.5ZM1.98438 1.875L6.96875 8.0625H9.03125L14.0156 1.875H1.98438ZM7.3125 9.4375V14.25L8.6875 13.2188V9.4375H7.3125Z" fill="#4D7CFE" />
+            </svg>
+            Filters
+          </button>
+          <button className="ms-link-button mx-4">1 filter <span>Applied</span></button>
+          <button className="ms-link-button mx-2">clear all</button>
         </div>
+        <div className="divider mb-4"></div>
+        <div className="row pt-2 mb-4">
+          <div className="col status">
+            <h1>Rp 1.575.000</h1>
+            <p>Total Fuel Cost</p>
+          </div>
+          <div className="col status">
+            <h1>293,65 L</h1>
+            <p>Total Fuel Volume </p>
+          </div>
+          <div className="col status">
+            <h1>38.046 km</h1>
+            <p>Total km </p>
+          </div>
+          <div className="col status">
+            <h1>MPG (US)</h1>
+            <p>Avg. Fuel Economy </p>
+          </div>
+          <div className="col status">
+            <h1>Rp 9,879</h1>
+            <p>Cost/Liter</p>
+          </div>
+
+        </div>
+        <div className="text-right">
+          <span className="pagination-status mr-3">1-10 of 40</span>
+          <button className="pagination-prev">
+            <svg width="7" height="15" viewBox="0 0 7 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 14.4609V13.125L7 1.875V0.539062L6.01562 1.45312L0.390625 7.07813L0.0390625 7.5L0.390625 7.92188L6.01562 13.5469L7 14.4609ZM5.875 11.7539L1.62109 7.5L5.875 3.24609V11.7539Z" fill="#778CA2" />
+            </svg>
+          </button>
+          <button className="pagination-next mr-3">
+            <svg width="7" height="15" viewBox="0 0 7 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 14.4609V13.125L0 1.875V0.539062L0.984375 1.45312L6.60938 7.07813L6.96094 7.5L6.60938 7.92188L0.984375 13.5469L0 14.4609ZM1.125 11.7539L5.37891 7.5L1.125 3.24609V11.7539Z" fill="#778CA2" />
+            </svg>
+          </button>
+          <Dropdown 
+            items={[{name: 'date', value: 'date'}, {name: 'status', value: 'status'}]}
+            viewedValueType="text"
+            placeholder="sort"
+            selectedValue={this.state.sortBy}
+            onChangeHandle={this.onDropdownChangeHandler}
+            />
+        </div>
+
       </div>
     )
   }

@@ -54,39 +54,3 @@
         }
     }
 }
-
-.search-container {
-    display: inline-block;
-    position: relative;
-    margin: 0 10px;
-    vertical-align: bottom;
-
-    svg {
-        position: absolute;
-        left: 14px;
-        top: 18px;
-    }
-    .ms-search {
-        height: 46px;
-        border: 1px solid #e8ecef;
-        box-sizing: border-box;
-        border-radius: 4px;
-        width: 258px;
-        padding-left: 36px;
-        font-size: 14px;
-    }
-}
-
-::-webkit-input-placeholder {
-    /* Edge */
-    color: $ms_placeholdertext;
-}
-
-:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $ms_placeholdertext;
-}
-
-::placeholder {
-    color: $ms_placeholdertext;
-}
