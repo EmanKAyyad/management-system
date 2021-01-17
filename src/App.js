@@ -1,18 +1,10 @@
 import './scss/App.scss';
 import Sidebar from './components/shared/Sidebar/Sidebar';
 import Header from './components/shared/Header/Header';
-import { BrowserRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import FuelHistory from './components/Dashboard/FuelHistory/FuelHistory';
 
-function App(props) {
-
-  const expandedPanel = {
-    flex: 1
-  };
-
-  const condensedPanel = {
-    width: 'calc(100% - 242px)'
-  };
+function App() {
 
   return (
     <BrowserRouter>
@@ -20,15 +12,14 @@ function App(props) {
         <Sidebar />
         <div className="right-screen">
           <Header />
+          <Switch>
+            <Route path="/fuel-history" component={FuelHistory}></Route>
+            <Redirect from="/" to="/fuel-history"></Redirect>
+          </Switch>
         </div>
       </div>
     </BrowserRouter>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    panelExpanded: !state.openSideBarFlag
-  }
-}
-export default connect(mapStateToProps)(App);
+export default App;

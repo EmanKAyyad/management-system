@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./fonts.scss";
+@import './variables.scss';
 
 html,
 body {
@@ -16,6 +17,7 @@ a {
 button {
     background-color: transparent;
     border: none;
+    padding: 0;
 }
 
 a:focus,
@@ -38,6 +40,20 @@ ul {
 
 .right-screen {
     width: 100%;
+}
+
+.main-panel {
+    background-color: $ms_PrimaryBg;
+    padding: 32px 27px;
+    height: calc(100% - 66px);
+}
+
+.main-title {
+    color: $ms_SecondaryText;
+    text-transform: capitalize;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
 }
 
 @include media-breakpoint-up(md) {

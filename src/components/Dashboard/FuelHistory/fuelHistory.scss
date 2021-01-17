@@ -1,0 +1,53 @@
+.filter-bar {
+    margin-top: 36px;
+}
+
+.InputFromTo .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+    background-color: #f0f8ff !important;
+    color: #4a90e2;
+}
+.InputFromTo .DayPicker-Day {
+    border-radius: 0 !important;
+}
+.InputFromTo .DayPicker-Day--start {
+    border-top-left-radius: 50% !important;
+    border-bottom-left-radius: 50% !important;
+}
+.InputFromTo .DayPicker-Day--end {
+    border-top-right-radius: 50% !important;
+    border-bottom-right-radius: 50% !important;
+}
+.InputFromTo .DayPickerInput-Overlay {
+    width: 575px;
+}
+.InputFromTo-to .DayPickerInput-Overlay {
+    margin-left: -198px;
+}
+
+.InputFromTo {
+    width: 258px;
+    background-color: #fff;
+    border: 1px solid #e8ecef;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    .calendar-icon {
+        display: inline-block;
+        width: 14px;
+        height: 17px;
+        margin: 0 11px;
+    }
+
+    input {
+        border: none;
+        width: 90px;
+        font-size: 14px;
+        font-weight: 400;
+        height: 44px;
+
+        &:focus,
+        &:active {
+            outline: none;
+        }
+    }
+}
