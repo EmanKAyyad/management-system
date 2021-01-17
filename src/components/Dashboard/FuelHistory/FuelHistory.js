@@ -5,6 +5,8 @@ import 'react-day-picker/lib/style.css';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import './fuelHistory.scss';
 import Dropdown from '../../shared/Dropdown/Dropdown';
+import egyFlag from '../../../assets/egyFlag.jpg';
+import usFlag from '../../../assets/usFlag.jpg';
 
 
 class FuelHistory extends Component {
@@ -15,7 +17,8 @@ class FuelHistory extends Component {
     this.state = {
       from: undefined,
       to: undefined,
-      sortBy: undefined
+      sortBy: undefined,
+      timezone: undefined
     };
   }
 
@@ -38,8 +41,17 @@ class FuelHistory extends Component {
     this.setState({ to }, this.showFromMonth);
   }
 
-  onDropdownChangeHandler = (value) => {
-    this.setState({sortBy: value})
+  onDropdownChangeHandler = (stateProp, value) => {
+    switch (stateProp) {
+      case 'sort':
+        this.setState({ sortBy: value })
+        break;
+      case 'timezone':
+        this.setState({ timezone: value })
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
@@ -145,13 +157,23 @@ class FuelHistory extends Component {
               <path d="M0 14.4609V13.125L0 1.875V0.539062L0.984375 1.45312L6.60938 7.07813L6.96094 7.5L6.60938 7.92188L0.984375 13.5469L0 14.4609ZM1.125 11.7539L5.37891 7.5L1.125 3.24609V11.7539Z" fill="#778CA2" />
             </svg>
           </button>
-          <Dropdown 
-            items={[{name: 'date', value: 'date'}, {name: 'status', value: 'status'}]}
-            viewedValueType="text"
-            placeholder="sort"
-            selectedValue={this.state.sortBy}
-            onChangeHandle={this.onDropdownChangeHandler}
+          <Dropdown
+            items={[{ src: egyFlag, value: 'egy' }, { src: usFlag, value: 'us' }]}
+            propertyViewed="src"
+            placeholder="Timezone"
+            selectedValue={this.state.timezone}
+            onChangeHandle={this.onDropdownChangeHandler.bind(this, 'timezone')}
+          />
+
+          <div className="d-inline-block ml-3">
+            <Dropdown
+              items={[{ name: 'date', value: 'date' }, { name: 'status', value: 'status' }]}
+              propertyViewed="name"
+              placeholder="sort"
+              selectedValue={this.state.sortBy}
+              onChangeHandle={this.onDropdownChangeHandler.bind(this, 'sort')}
             />
+          </div>
         </div>
 
       </div>
