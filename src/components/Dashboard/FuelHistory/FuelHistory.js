@@ -176,6 +176,23 @@ class FuelHistory extends Component {
           </div>
         </div>
 
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Time</th>
+                <th>total km</th>
+                <th>Volume</th>
+                <th>Cost</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
