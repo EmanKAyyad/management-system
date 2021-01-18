@@ -3,7 +3,7 @@
         {
             "id": "001",
             "name": "Toyota Avanza",
-            "date": "18/1/2021",
+            "date": "1/18/2021",
             "status": 1,
             "time": "10:23 AM",
             "total_km": 17.845,
@@ -13,7 +13,7 @@
         {
             "id": "002",
             "name": "Toyota Xenia",
-            "date": "22/1/2021",
+            "date": "1/22/2021",
             "status": 2,
             "time": "9:45 AM",
             "total_km": 8.845,
@@ -33,7 +33,7 @@
         {
             "id": "004",
             "name": "Toyota Corolla",
-            "date": "18/1/2021",
+            "date": "1/18/2021",
             "status": 3,
             "time": "5:30 pm",
             "total_km": 17.845,
@@ -43,7 +43,7 @@
         {
             "id": "005",
             "name": "Toyota Avanza",
-            "date": "18/1/2021",
+            "date": "1/18/2021",
             "status": 1,
             "time": "10:23 AM",
             "total_km": 17.845,
@@ -83,7 +83,7 @@
         {
             "id": "009",
             "name": "Toyota Avanza",
-            "date": "18/1/2021",
+            "date": "1/18/2021",
             "status": 2,
             "time": "10:23 AM",
             "total_km": 17.845,

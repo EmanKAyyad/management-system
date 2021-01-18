@@ -8,6 +8,7 @@
     line-height: 17px;
     text-transform: capitalize;
     border: 1px solid #e8ecef;
+    z-index: 100;
 
     &:focus .dropdown-list,
     &:active .dropdown-list {

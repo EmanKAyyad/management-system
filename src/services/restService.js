@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 const urls = {
-    historyItems: ''
+    vehiclesURL: 'https://my-json-server.typicode.com/EmanKAyyad/management-system/vehicles'
 }
 
 class RestService {
-    getHistoryItems = () => axios.get(urls.historyItems)
+    getVehicles = () => axios.get(urls.vehiclesURL);
 }
+const restService = new RestService();
+export default restService;

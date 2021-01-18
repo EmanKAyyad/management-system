@@ -46,6 +46,7 @@ ul {
     background-color: $ms_PrimaryBg;
     padding: 32px 27px;
     height: calc(100% - 66px);
+    overflow: auto;
 }
 
 .main-title {
@@ -128,14 +129,14 @@ ul {
         font-weight: 300;
         color: $ms_statusBlue;
     }
-    p{
+    p {
         font-size: 12px;
         color: $ms_SecondaryText;
         margin-bottom: 0;
     }
 }
 
-.pagination-status{
+.pagination-status {
     color: $ms_SecondaryText;
 }
 
@@ -143,13 +144,41 @@ button.pagination-prev,
 button.pagination-next {
     width: 47px;
     padding: 10px 14px;
-    border: 1px solid #E8ECEF;
+    border: 1px solid #e8ecef;
     background-color: #fff;
 }
 
-button.pagination-prev{
+button.pagination-prev {
     border-radius: 4px 0px 0px 4px;
 }
-button.pagination-next{
+button.pagination-next {
     border-radius: 0px 4px 4px 0px;
+}
+
+.ms-table {
+    border: 1px solid #e8ecef;
+    border-radius: 4px;
+}
+
+.table-headers {
+    box-sizing: border-box;
+    border-bottom: 1px solid #e8ecef;
+
+    .col {
+        font-size: 12px;
+        line-height: 17px;
+        color: $ms_SecondaryText;
+        text-transform: capitalize;
+        padding: 16px;
+    }
+}
+
+.table-body {
+    .date-group .date {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 32px;
+        color: $ms_PrimaryText;
+        padding: 4px 14px;
+    }
 }

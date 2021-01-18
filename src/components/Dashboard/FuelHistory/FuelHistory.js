@@ -7,6 +7,9 @@ import './fuelHistory.scss';
 import Dropdown from '../../shared/Dropdown/Dropdown';
 import egyFlag from '../../../assets/egyFlag.jpg';
 import usFlag from '../../../assets/usFlag.jpg';
+import restService from '../../../services/restService';
+import VehiclesByDate from './VehiclesByDate/VehiclesByDate';
+import VehiclesByStatus from './VehiclesByStatus/VehiclesByStatus';
 
 
 class FuelHistory extends Component {
@@ -17,11 +20,26 @@ class FuelHistory extends Component {
     this.state = {
       from: undefined,
       to: undefined,
-      sortBy: undefined,
-      timezone: undefined
+      sortBy: { name: 'date', value: 'date' },
+      sortFrom: [{ name: 'date', value: 'date' }, { name: 'status', value: 'status' }],
+      timezone: undefined,
+      vehicles: [],
+      sortedVehicles: []
     };
   }
 
+  componentDidMount() {
+    restService.getVehicles().then(
+      response => {
+        if (response && response.status === 200) {
+          this.setState({ vehicles: response.data}, () =>{
+            this.setState({sortedVehicles: this.groupByDate()})
+          });
+        }
+      }
+    )
+
+  }
   showFromMonth() {
     const { from, to } = this.state;
     if (!from) {
@@ -41,10 +59,40 @@ class FuelHistory extends Component {
     this.setState({ to }, this.showFromMonth);
   }
 
+  groupByDate() {
+    const vehiclesGroupedByDate = [];
+    this.state.vehicles.map(vehicle => {
+      let targetDateObject = vehiclesGroupedByDate.find(z => z.date === vehicle.date);
+      if (targetDateObject) {
+        if (!targetDateObject.vehicles.find(y => y.id === vehicle.id)) {
+          targetDateObject.vehicles.push(vehicle);
+        }
+      } else {
+        vehiclesGroupedByDate.push({ date: vehicle.date, vehicles: [vehicle] });
+      }
+    })
+    return vehiclesGroupedByDate;
+  }
+
+  groupByStatus() {
+    const vehiclesGroupedByStatus = [];
+    this.state.vehicles.map(vehicle => {
+      let targetDateObject = vehiclesGroupedByStatus.find(z => z.status === vehicle.status);
+      if (targetDateObject) {
+        if (!targetDateObject.vehicles.find(y => y.id === vehicle.id)) {
+          targetDateObject.vehicles.push(vehicle);
+        }
+      } else {
+        vehiclesGroupedByStatus.push({ status: vehicle.status, vehicles: [vehicle] });
+      }
+    })
+    return vehiclesGroupedByStatus;
+  }
+
   onDropdownChangeHandler = (stateProp, value) => {
     switch (stateProp) {
       case 'sort':
-        this.setState({ sortBy: value })
+        this.setState({ sortBy: value, sortedVehicles: value === 'date' ? this.groupByDate() : this.groupByStatus() });
         break;
       case 'timezone':
         this.setState({ timezone: value })
@@ -57,6 +105,7 @@ class FuelHistory extends Component {
   render() {
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
+    const sortedListType = this.state.sortBy.value === "date" ? <VehiclesByDate dates={this.state.sortedVehicles} /> : <VehiclesByStatus dates={this.state.sortedVehicles} />
 
     return (
       <div className="fuel-history-container main-panel">
@@ -167,7 +216,7 @@ class FuelHistory extends Component {
 
           <div className="d-inline-block ml-3">
             <Dropdown
-              items={[{ name: 'date', value: 'date' }, { name: 'status', value: 'status' }]}
+              items={this.state.sortFrom}
               propertyViewed="name"
               placeholder="sort"
               selectedValue={this.state.sortBy}
@@ -176,22 +225,18 @@ class FuelHistory extends Component {
           </div>
         </div>
 
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Vehicle</th>
-                <th>Time</th>
-                <th>total km</th>
-                <th>Volume</th>
-                <th>Cost</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-          </table>
+        <div className="mt-4 ms-table">
+          <div className="table-headers row no-gutters">
+            <div className="col">Vehicle</div>
+            <div className="col">Time</div>
+            <div className="col">total km</div>
+            <div className="col">Volume</div>
+            <div className="col">Cost</div>
+            <div className="col">Actions</div>
+          </div>
+          <div className="table-body">
+            { sortedListType }
+          </div>
         </div>
       </div>
     )

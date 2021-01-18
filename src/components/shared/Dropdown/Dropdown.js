@@ -4,6 +4,7 @@ import './dropdown.scss';
 const Dropdown = (props) => {
 
     const btnRef = useRef(null);
+
     const onChangeHandler = (event) => {
         props.onChangeHandle(props.items.find(z => z.value === event.currentTarget.getAttribute("value")));
         btnRef.current.blur();
