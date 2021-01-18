@@ -181,4 +181,48 @@ button.pagination-next {
         color: $ms_PrimaryText;
         padding: 4px 14px;
     }
+    .row {
+        border-bottom: 1px solid #e8ecef;
+    }
+
+    .row:not(.date) {
+        background-color: #fff;
+    }
+
+    .col:first-of-type {
+        color: $ms_PrimaryText;
+    }
+    .col {
+        font-size: 14px;
+        line-height: 17px;
+        color: $ms_SecondaryText;
+        text-transform: capitalize;
+        padding: 16px;
+    }
+
+    .vehicle-img {
+        height: 35px;
+        width: 35px;
+        background-color: #eee;
+        border-radius: 100%;
+        margin-right: 12px;
+    }
+
+    .status {
+        font-size: 12px;
+        &.active {
+            color: #21A11E;
+        }
+        &.inshop {
+            color: #C1931B;
+        }
+        &.out-of-service {
+            color: #C11B1B;
+        }
+    }
+    
+    .action-buttons {
+        display: flex;
+        align-items: center;
+    }
 }

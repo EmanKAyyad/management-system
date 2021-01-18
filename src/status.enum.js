@@ -1,5 +1,7 @@
-export const statusEnum = {
-    "active": 1,
-    "inshop": 2,
-    "out of service": 3,
-}
+const statusEnum = Object.freeze({
+    active: 1,
+    inshop: 2,
+    outOfService: 3,
+});
+
+export default statusEnum;
