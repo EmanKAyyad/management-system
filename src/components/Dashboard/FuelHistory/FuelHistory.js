@@ -32,8 +32,8 @@ class FuelHistory extends Component {
     restService.getVehicles().then(
       response => {
         if (response && response.status === 200) {
-          this.setState({ vehicles: response.data}, () =>{
-            this.setState({sortedVehicles: this.groupByDate()})
+          this.setState({ vehicles: response.data }, () => {
+            this.setState({ sortedVehicles: this.groupByDate() })
           });
         }
       }
@@ -102,10 +102,27 @@ class FuelHistory extends Component {
     }
   }
 
+  deleteVehicleHandler = (id) => {
+    const list = [...this.state.vehicles];
+    const targetElemIndex = list.findIndex(z => z.id === id);
+    list.splice(targetElemIndex, 1);
+
+    this.setState({vehicles: list}, () => {
+      if(this.state.sortBy.value === 'date') this.setState({sortedVehicles: this.groupByDate()})
+      else this.setState({sortedVehicles: this.groupByStatus()})
+    });
+  }
+
   render() {
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
-    const sortedListType = this.state.sortBy.value === "date" ? <VehiclesByDate dates={this.state.sortedVehicles} /> : <VehiclesByStatus dates={this.state.sortedVehicles} />
+    const sortedListType = this.state.sortBy.value === "date" ? 
+      <VehiclesByDate 
+        deleteVehicle={this.deleteVehicleHandler}
+        dates={this.state.sortedVehicles} /> : 
+      <VehiclesByStatus 
+        deleteVehicle={this.deleteVehicleHandler}
+        dates={this.state.sortedVehicles} />
 
     return (
       <div className="fuel-history-container main-panel">
@@ -235,7 +252,7 @@ class FuelHistory extends Component {
             <div className="col">Actions</div>
           </div>
           <div className="table-body">
-            { sortedListType }
+            {sortedListType}
           </div>
         </div>
       </div>
