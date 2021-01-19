@@ -81,6 +81,7 @@ class FuelHistory extends Component {
       if (targetDateObject) {
         if (!targetDateObject.vehicles.find(y => y.id === vehicle.id)) {
           targetDateObject.vehicles.push(vehicle);
+          console.log(targetDateObject)
         }
       } else {
         vehiclesGroupedByStatus.push({ status: vehicle.status, vehicles: [vehicle] });
@@ -90,9 +91,10 @@ class FuelHistory extends Component {
   }
 
   onDropdownChangeHandler = (stateProp, value) => {
+    console.log(value)
     switch (stateProp) {
       case 'sort':
-        this.setState({ sortBy: value, sortedVehicles: value === 'date' ? this.groupByDate() : this.groupByStatus() });
+        this.setState({ sortBy: value, sortedVehicles: value.value === 'date' ? this.groupByDate() : this.groupByStatus() });
         break;
       case 'timezone':
         this.setState({ timezone: value })
@@ -122,7 +124,7 @@ class FuelHistory extends Component {
         dates={this.state.sortedVehicles} /> : 
       <VehiclesByStatus 
         deleteVehicle={this.deleteVehicleHandler}
-        dates={this.state.sortedVehicles} />
+        statuses={this.state.sortedVehicles} />
 
     return (
       <div className="fuel-history-container main-panel">

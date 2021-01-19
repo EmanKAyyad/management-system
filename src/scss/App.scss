@@ -174,13 +174,15 @@ button.pagination-next {
 }
 
 .table-body {
-    .date-group .date {
+    .date-group > .date,
+    .status-group > .status {
         font-weight: 500;
         font-size: 12px;
         line-height: 32px;
         color: $ms_PrimaryText;
         padding: 4px 14px;
     }
+
     .row {
         border-bottom: 1px solid #e8ecef;
     }
