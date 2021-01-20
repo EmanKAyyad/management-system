@@ -14,12 +14,12 @@ const reducer = (state = initialState, action) => {
             }
 
         case 'UPDATE_VEHICLES':
-            
+
             return {
                 ...state,
                 vehicles: action.vehicles
             }
-        
+
         case 'UPDATE_VEHICLE_ID_TO_EDIT':
             return {
                 ...state,
@@ -33,6 +33,14 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 vehicles: newVehicles
+            }
+        case 'DELETE_VEHICLE':
+            const targetElemIndex = state.vehicles.findIndex(z => z.id === action.id);
+            const updatedVehicles = [...state.vehicles];
+            updatedVehicles.splice(targetElemIndex, 1);
+            return {
+                ...state,
+                vehicles: updatedVehicles
             }
     }
     return state;

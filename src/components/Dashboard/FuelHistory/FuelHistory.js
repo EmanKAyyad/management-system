@@ -68,7 +68,13 @@ class FuelHistory extends Component {
 
   groupByDate() {
     const vehiclesGroupedByDate = [];
-    this.props.vehicles.map(vehicle => {
+    const originalVehiclesArray = [...this.props.vehicles];
+    originalVehiclesArray.sort(function(a,b){
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.date) - new Date(a.date);
+    });
+    originalVehiclesArray.map(vehicle => {
       let targetDateObject = vehiclesGroupedByDate.find(z => z.date === vehicle.date);
       if (targetDateObject) {
         if (!targetDateObject.vehicles.find(y => y.id === vehicle.id)) {
@@ -110,14 +116,17 @@ class FuelHistory extends Component {
   }
 
   deleteVehicleHandler = (id) => {
-    const list = [...this.state.vehicles];
-    const targetElemIndex = list.findIndex(z => z.id === id);
-    list.splice(targetElemIndex, 1);
+    // const list = [...this.state.vehicles];
+    // const targetElemIndex = list.findIndex(z => z.id === id);
+    // list.splice(targetElemIndex, 1);
 
-    this.setState({ vehicles: list }, () => {
-      if (this.state.sortBy.value === 'date') this.setState({ sortedVehicles: this.groupByDate() })
-      else this.setState({ sortedVehicles: this.groupByStatus() })
-    });
+    // this.setState({ vehicles: list }, () => {
+    //   if (this.state.sortBy.value === 'date') this.setState({ sortedVehicles: this.groupByDate() })
+    //   else this.setState({ sortedVehicles: this.groupByStatus() })
+    // });
+
+    this.props.deleteVehicle(id);
+
   }
 
   render() {
@@ -277,7 +286,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateVehicles: (vehicles) => dispatch({ type: 'UPDATE_VEHICLES', vehicles: vehicles }),
-    editVehicle: (id) => dispatch({ type: 'UPDATE_VEHICLE_ID_TO_EDIT', id: id })
+    editVehicle: (id) => dispatch({ type: 'UPDATE_VEHICLE_ID_TO_EDIT', id: id }),
+    deleteVehicle: (id) => dispatch({ type: 'DELETE_VEHICLE', id: id })
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FuelHistory);
