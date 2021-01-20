@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "formik": "^2.2.6",
     "jquery": "^3.5.1",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
@@ -19,7 +20,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",

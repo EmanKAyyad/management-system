@@ -10,6 +10,8 @@ import usFlag from '../../../assets/usFlag.jpg';
 import restService from '../../../services/restService';
 import VehiclesByDate from './VehiclesByDate/VehiclesByDate';
 import VehiclesByStatus from './VehiclesByStatus/VehiclesByStatus';
+import EditVehicleModal from './EditVehicleModal/EditVehicleModal';
+import { connect } from 'react-redux';
 
 
 class FuelHistory extends Component {
@@ -23,7 +25,6 @@ class FuelHistory extends Component {
       sortBy: { name: 'date', value: 'date' },
       sortFrom: [{ name: 'date', value: 'date' }, { name: 'status', value: 'status' }],
       timezone: undefined,
-      vehicles: [],
       sortedVehicles: []
     };
   }
@@ -32,13 +33,19 @@ class FuelHistory extends Component {
     restService.getVehicles().then(
       response => {
         if (response && response.status === 200) {
-          this.setState({ vehicles: response.data }, () => {
-            this.setState({ sortedVehicles: this.groupByDate() })
-          });
+          this.props.updateVehicles(response.data);
         }
       }
     )
 
+  }
+
+  componentDidUpdate(prevProps,prevState) {
+    if((this.state.sortBy.value !== prevState.sortBy.value) || 
+        this.state.sortedVehicles.length === 0 ||
+        prevProps.vehicles !== this.props.vehicles) {
+      this.setState({ sortedVehicles: this.state.sortBy.value === 'date' ? this.groupByDate() : this.groupByStatus() })
+    }
   }
   showFromMonth() {
     const { from, to } = this.state;
@@ -61,7 +68,7 @@ class FuelHistory extends Component {
 
   groupByDate() {
     const vehiclesGroupedByDate = [];
-    this.state.vehicles.map(vehicle => {
+    this.props.vehicles.map(vehicle => {
       let targetDateObject = vehiclesGroupedByDate.find(z => z.date === vehicle.date);
       if (targetDateObject) {
         if (!targetDateObject.vehicles.find(y => y.id === vehicle.id)) {
@@ -76,12 +83,11 @@ class FuelHistory extends Component {
 
   groupByStatus() {
     const vehiclesGroupedByStatus = [];
-    this.state.vehicles.map(vehicle => {
+    this.props.vehicles.map(vehicle => {
       let targetDateObject = vehiclesGroupedByStatus.find(z => z.status === vehicle.status);
       if (targetDateObject) {
         if (!targetDateObject.vehicles.find(y => y.id === vehicle.id)) {
           targetDateObject.vehicles.push(vehicle);
-          console.log(targetDateObject)
         }
       } else {
         vehiclesGroupedByStatus.push({ status: vehicle.status, vehicles: [vehicle] });
@@ -91,7 +97,6 @@ class FuelHistory extends Component {
   }
 
   onDropdownChangeHandler = (stateProp, value) => {
-    console.log(value)
     switch (stateProp) {
       case 'sort':
         this.setState({ sortBy: value, sortedVehicles: value.value === 'date' ? this.groupByDate() : this.groupByStatus() });
@@ -109,20 +114,20 @@ class FuelHistory extends Component {
     const targetElemIndex = list.findIndex(z => z.id === id);
     list.splice(targetElemIndex, 1);
 
-    this.setState({vehicles: list}, () => {
-      if(this.state.sortBy.value === 'date') this.setState({sortedVehicles: this.groupByDate()})
-      else this.setState({sortedVehicles: this.groupByStatus()})
+    this.setState({ vehicles: list }, () => {
+      if (this.state.sortBy.value === 'date') this.setState({ sortedVehicles: this.groupByDate() })
+      else this.setState({ sortedVehicles: this.groupByStatus() })
     });
   }
 
   render() {
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
-    const sortedListType = this.state.sortBy.value === "date" ? 
-      <VehiclesByDate 
+    const sortedListType = this.state.sortBy.value === "date" ?
+      <VehiclesByDate
         deleteVehicle={this.deleteVehicleHandler}
-        dates={this.state.sortedVehicles} /> : 
-      <VehiclesByStatus 
+        dates={this.state.sortedVehicles} /> :
+      <VehiclesByStatus
         deleteVehicle={this.deleteVehicleHandler}
         statuses={this.state.sortedVehicles} />
 
@@ -257,10 +262,22 @@ class FuelHistory extends Component {
             {sortedListType}
           </div>
         </div>
+        <EditVehicleModal />
       </div>
     )
   }
 
 }
 
-export default FuelHistory;
+const mapStateToProps = state => {
+  return {
+    vehicles: state.vehicles
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    updateVehicles: (vehicles) => dispatch({ type: 'UPDATE_VEHICLES', vehicles: vehicles }),
+    editVehicle: (id) => dispatch({ type: 'UPDATE_VEHICLE_ID_TO_EDIT', id: id })
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(FuelHistory);
