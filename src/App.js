@@ -1,8 +1,8 @@
 import './scss/App.scss';
 import Sidebar from './components/shared/Sidebar/Sidebar';
 import Header from './components/shared/Header/Header';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import FuelHistory from './components/Dashboard/FuelHistory/FuelHistory';
+import { BrowserRouter } from 'react-router-dom';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
 
@@ -11,11 +11,8 @@ function App() {
       <div className="app-container">
         <Sidebar />
         <div className="right-screen">
-          <Header />
-          <Switch>
-            <Route path="/fuel-history" component={FuelHistory}></Route>
-            <Redirect from="/" to="/fuel-history"></Redirect>
-          </Switch>
+          <Header />            
+          <Dashboard />
         </div>
       </div>
     </BrowserRouter>
