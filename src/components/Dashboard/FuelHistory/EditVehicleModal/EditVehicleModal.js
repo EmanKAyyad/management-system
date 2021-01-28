@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { useRef } from 'react/cjs/react.development';
 import moment from 'moment';
+import classes from './EditVehicleModal.module.scss';
 
 const EditVehicleModal = (props) => {
     let targetVehicle;
@@ -123,7 +124,7 @@ const EditVehicleModal = (props) => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" id="close-modal" className="ms-secondary-button" data-dismiss="modal">Cancel</button>
-                                <button type="submit" className="ms-primary-button">Save</button>
+                                <button type="submit" className={classes.msPrimaryButton + ' ms-primary-button'}>Save</button>
                             </div>
                         </div>
                     </div>
